@@ -1,0 +1,42 @@
+﻿@using Ecommerce.MvcWEBUI.Models
+@model IEnumerable<ProductModel>
+@{
+    ViewBag.Title = "List";
+}
+
+
+<div class="row">
+
+    @foreach (var urun in Model)
+    {
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <img class="card-img-top img-responsive" src="/Upload/@urun.Image" alt="@urun.Name">
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <h4 class="card-title">
+                            <a href="/Home/Details/@urun.Id"> @urun.Name</a>
+                        </h4>
+                    </div>
+                    <div class="col-md-12">
+                        <p class="card-text pt-2 description">
+                            @urun.Description
+                        </p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <i id="dollar" class="fa fa-usd" aria-hidden="true"></i>
+                    <small class="text-muted price-text">
+                        @urun.Price
+                    </small>
+                    <a href="/Home/Details/@urun.Id" class="btn btn-default btn-sm float-right">
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+
+                        Detailed
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>

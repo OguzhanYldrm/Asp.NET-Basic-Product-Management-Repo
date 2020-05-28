@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Ecommerce.MvcWEBUI.Models;
+using Ecommerce.MvcWEBUI.Entity;
 
-namespace Ecommerce.MvcWEBUI.Models
+namespace Ecommerce.MvcWEBUI.Entity
 {
     public class Category
     {

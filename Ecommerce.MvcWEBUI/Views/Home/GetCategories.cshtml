@@ -1,0 +1,61 @@
+﻿@using Ecommerce.MvcWEBUI.Entity
+@model IEnumerable<Category>
+
+@{
+    var selectedCategory = Url.RequestContext.RouteData.Values["id"];
+}
+
+
+
+    <ul class="list-group">
+
+        @if (selectedCategory == null)
+        {
+            <a class="list-group-item list-group-item-action active" href="/Home/List">
+                All Categories
+            </a>
+        }
+        else
+        {
+            <a class="list-group-item list-group-item-action" href="/Home/List">
+                All Categories
+            </a>
+        }
+
+
+        @foreach (var category in Model)
+        {
+            if (selectedCategory != null)
+            {
+                if (category.Id == int.Parse(selectedCategory.ToString()))
+                {
+                    //current category is this "category"
+
+                    <a class="list-group-item list-group-item-action active" href="/Home/List/@category.Id">
+                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                        @category.Name
+                    </a>
+
+                }
+                else
+                {
+
+                    <a class="list-group-item list-group-item-action" href="/Home/List/@category.Id">
+                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                        @category.Name
+                    </a>
+
+                }
+            }
+            else
+            {
+                <a class="list-group-item list-group-item-action" href="/Home/List/@category.Id">
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    @category.Name
+                </a>
+            }
+
+
+
+        }
+    </ul>
