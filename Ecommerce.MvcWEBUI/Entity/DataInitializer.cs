@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
-using Ecommerce.MvcWEBUI.Entity;
 
-namespace Ecommerce.MvcWEBUI.Models
+namespace Ecommerce.MvcWEBUI.Entity
 {
     public class DataInitializer : DropCreateDatabaseIfModelChanges<DataContext>
     {

@@ -1,0 +1,90 @@
+﻿@model IEnumerable<Ecommerce.MvcWEBUI.Entity.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+
+<div class="container pb-5">
+    <h2>Product List</h2>
+    <hr />
+    <p>
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+    </p>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.IsHome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsApproved)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>
+           <img src="/Upload/@item.Image" width="70"/>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Stock)
+        </td>
+        <td>
+            @if (item.IsHome)
+            {
+                <i class="fa fa-check" style="color:green" aria-hidden="true"></i>
+
+            }
+            else
+            {
+                <i class="fa fa-times" style="color:red" aria-hidden="true"></i>
+            }
+        </td>
+        <td>
+            @if (item.IsApproved)
+            {
+                <i class="fa fa-check"  style="color:green" aria-hidden="true"></i>
+
+            }
+            else
+            {
+                <i class="fa fa-times" style="color:red" aria-hidden="true"></i>
+            }
+        </td>
+        <td class="d-flex  flex-nowrap">
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-info btn-sm mr-2" }) 
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+        </td>
+    </tr>
+        }
+
+    </table>
+</div>
