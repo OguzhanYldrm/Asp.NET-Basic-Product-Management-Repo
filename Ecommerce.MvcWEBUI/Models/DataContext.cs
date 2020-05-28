@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
-using Ecommerce.MvcWEBUI.Models;
+using Ecommerce.MvcWEBUI.Entity;
 
 namespace Ecommerce.MvcWEBUI.Models
 {

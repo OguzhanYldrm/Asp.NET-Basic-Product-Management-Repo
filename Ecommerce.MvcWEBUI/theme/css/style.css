@@ -1,8 +1,10 @@
-.jumbotron
-{
+.jumbotron {
     background-image: url("../img/bg.jpg");
-    background-size: cover;
-    height: 100%;
+    background-size:cover;
+    background-position-y: -33px;
+    font-family: sans-serif;
+    font-weight: bold;
+
 }
 
 #write-review
@@ -18,11 +20,39 @@
     color: #FFCC00;
 }
 
+.card-title 
+{
+    font-size: 16px;
+    font-weight: 400;
+    color: #484848;
+    line-height: 1.35em;
+    height: 34px;
+}
+
+.description {
+    font-size: 12px;
+    min-height: 40px;
+}
+
+.price-text {
+    
+    font-weight: 700;
+    font-size: 17px;
+}
+
+#dollar {
+    color: green;
+}
+
+#product-details h1 {
+    font-size: 20px;
+    font-weight: 700;
+}
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 body {
   /* Margin bottom by footer height */
