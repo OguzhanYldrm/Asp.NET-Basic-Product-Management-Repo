@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Ecommerce.MvcWEBUI.Entity;
+using Ecommerce.MvcWEBUI.Identity;
 
 namespace Ecommerce.MvcWEBUI
 {
@@ -13,6 +16,9 @@ namespace Ecommerce.MvcWEBUI
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            Database.SetInitializer(new DataInitializer());
+            Database.SetInitializer(new IdentityInitializer());
         }
     }
 }
