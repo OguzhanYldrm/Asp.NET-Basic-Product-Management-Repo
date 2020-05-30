@@ -1,0 +1,33 @@
+﻿
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    <label class="badge badge-info mr-2">
+        @User.Identity.Name
+    </label>
+
+    <a href="/Account/Logout" class="btn btn-danger btn-sm d-flex align-items-center flex-nowrap" style="max-width: 150px">
+        <i class="fa fa-power-off mr-2" aria-hidden="true">
+
+        </i>
+        <strong style="font-size: 12px">Logout</strong>
+    </a>
+
+
+}
+else
+{
+    <a href="/Account/Login" class="btn btn-success btn-sm mr-3 mb-2 d-flex justify-content-center align-items-center flex-nowrap" style="max-width: 150px">
+        <i class="fa fa-sign-in mr-2" aria-hidden="true"></i>
+        <strong style="font-size: 12px">Login</strong>
+    </a>
+
+    <a href="/Account/Register" class="btn btn-warning btn-sm mb-2 d-flex justify-content-center align-items-center flex-nowrap" style="max-width: 150px">
+        <i class="fa fa-user-circle-o mr-2" aria-hidden="true"></i>
+
+        <strong style="font-size: 12px">Register</strong>
+    </a>
+
+
+}
