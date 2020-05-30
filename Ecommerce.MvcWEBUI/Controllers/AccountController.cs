@@ -27,6 +27,8 @@ namespace Ecommerce.MvcWEBUI.Controllers
             _roleManager = new RoleManager<ApplicationRole>(roleStore);
         }
 
+      
+
         // GET: Login
         public ActionResult Login()
         {
