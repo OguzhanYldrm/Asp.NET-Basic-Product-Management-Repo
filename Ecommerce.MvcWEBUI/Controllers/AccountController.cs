@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Ecommerce.MvcWEBUI.Entity;
 using Ecommerce.MvcWEBUI.Identity;
 using Ecommerce.MvcWEBUI.Models;
 using Microsoft.AspNet.Identity;
@@ -13,6 +14,8 @@ namespace Ecommerce.MvcWEBUI.Controllers
 {
     public class AccountController : Controller
     {
+        private DataContext db = new DataContext();
+
         private UserManager<ApplicationUser> _userManager;
 
         private RoleManager<ApplicationRole> _roleManager;
@@ -27,7 +30,25 @@ namespace Ecommerce.MvcWEBUI.Controllers
             _roleManager = new RoleManager<ApplicationRole>(roleStore);
         }
 
-      
+
+
+
+        [Authorize]
+        public ActionResult Index()
+        {
+            var orders = db.Orders
+                .Where(i => i.UserName == User.Identity.Name)
+                .Select(i => new UserOrderModel()
+                {
+                    Id = i.Id,
+                    OrderNumber = i.OrderNumber,
+                    OrderDate = i.OrderDate,
+                    OrderState = i.OrderState,
+                    Total = i.Total
+                }).OrderByDescending(i => i.OrderDate).ToList();
+
+            return View(orders);
+        }
 
         // GET: Login
         public ActionResult Login()
@@ -121,6 +142,37 @@ namespace Ecommerce.MvcWEBUI.Controllers
 
             return RedirectToAction("Index", "Home");
 
+        }
+
+        [Authorize]
+        public ActionResult Details(int id)
+        {
+            var entity = db.Orders
+                .Where(i => i.Id == id)
+                .Select(i => new OrderDetailsModel()
+                {
+                    OrderId = i.Id,
+                    OrderNumber = i.OrderNumber,
+                    OrderDate = i.OrderDate,
+                    OrderState = i.OrderState,
+                    Total = i.Total,
+                    AddressTitle = i.AddressTitle,
+                    Address = i.Address,
+                    City = i.City,
+                    State = i.State,
+                    Zipcode = i.Zipcode,
+                    OrderLines = i.OrderLines.Select(j => new OrderLineModel()
+                    {
+                        ProductId = j.ProductId,
+                        Price = j.Price,
+                        ProductName = j.Product.Name.Length>50?j.Product.Name.Substring(0,25)+"...":j.Product.Name,
+                        Image = j.Product.Image,
+                        Quantity = j.Quantity,
+                        
+                    }).ToList()
+                }).FirstOrDefault();
+
+            return View(entity);
         }
     }
 }

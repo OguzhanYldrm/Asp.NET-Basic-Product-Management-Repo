@@ -2,10 +2,12 @@
 
 
 @if (User.Identity.IsAuthenticated)
-{
-    <label class="badge badge-info mr-2">
-        @User.Identity.Name
-    </label>
+{<a href="/Account">
+        <label class="btn btn-info btn-sm mr-2">
+            <span>@User.Identity.Name</span>
+        </label>
+    </a>
+
 
     <a href="/Account/Logout" class="btn btn-danger btn-sm d-flex align-items-center flex-nowrap" style="max-width: 150px">
         <i class="fa fa-power-off mr-2" aria-hidden="true">

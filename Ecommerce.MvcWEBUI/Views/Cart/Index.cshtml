@@ -31,7 +31,7 @@
                         @foreach (var product in Model.CartLines)
                         {
                             <tr>
-                                <td><img src="/Upload/@product.Product.Image" width="60px" /></td>
+                                <td><img src="/Upload/@product.Product.Image" width="60" /></td>
                                 <td>@product.Quantity</td>
                                 <td>@product.Product.Name</td>
                                 <td>@product.Product.Price</td>
@@ -50,19 +50,30 @@
 
                     </tbody>
                     <tfoot>
-                    <tr>
-                        
-                        <td colspan="5"></td>
-                        <td>@Model.Total().ToString("c")</td>
-                    </tr>
+                        <tr>
+
+                            <td colspan="5"></td>
+                            <td>@Model.Total().ToString("c")</td>
+                        </tr>
                     </tfoot>
                 </table>
+
+                <div class="row justify-content-center">
+                    <a href="/Home/List" class="btn btn-outline-primary mr-2">
+                        <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+                        Continue Shopping
+                    </a>
+                    <a href="/Cart/Checkout" class="btn btn-success">
+                        <i class="fa fa-credit-card" aria-hidden="true"></i>
+                        Checkout
+                    </a>
+                </div>
             }
             else
             {
                 <div class="alert alert-warning" role="alert">
                     <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                    No products in cart. 
+                    No products in cart.
                     <a href="/Home/List" class="alert-link">
                         Want to add some ?
                     </a>
