@@ -1,0 +1,45 @@
+﻿@using Ecommerce.MvcWEBUI.Models
+@model List<AdminOrderModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+
+<div class="container pb-5">
+    <h2>Orders</h2>
+    
+    <hr/>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Order Number</th>
+            <th>Order Date</th>
+            <th>Order Status</th>
+            <th>Total</th>
+            <th>Product Count</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.Id</td>
+                    <td>@order.OrderNumber</td>
+                    <td>@order.OrderDate</td>
+                    <td>@order.OrderState</td>
+                    <td>@order.Total</td>
+                    <td>@order.Count</td>
+                    <td>
+                        @Html.ActionLink("Details","Details",new {id = @order.Id},new{@class = "btn btn-primary btn-sm"})
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
