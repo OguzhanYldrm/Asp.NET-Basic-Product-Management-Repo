@@ -1,0 +1,86 @@
+﻿@using Ecommerce.MvcWEBUI.Entity
+@model Ecommerce.MvcWEBUI.Models.OrderDetailsModel
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <h2>Order Details</h2>
+        <hr />
+
+        <dl class="row">
+            <dt class="col-sm-3">Order State</dt>
+            <dd class="col-sm-9">
+                @if (Model.OrderState == EnumOrderState.Waiting)
+                {
+                    <span class="badge badge-danger">@Model.OrderState</span>
+                }
+                else
+                {
+                    <span class="badge badge-success">@Model.OrderState</span>
+                }
+            </dd>
+
+            <dt class="col-sm-3">Order Id</dt>
+            <dd class="col-sm-9">@Model.OrderId</dd>
+
+            <dt class="col-sm-3">Order Number</dt>
+            <dd class="col-sm-9">@Model.OrderNumber</dd>
+
+            <dt class="col-sm-3">Total</dt>
+            <dd class="col-sm-9">@Model.Total</dd>
+
+            <dt class="col-sm-3">Order Date</dt>
+            <dd class="col-sm-9">@Model.OrderDate</dd>
+
+            <dt class="col-sm-3">Address</dt>
+            <dd class="col-sm-9">
+                @Model.AddressTitle
+                <br />
+                @Model.Address
+                <br />
+                @Model.City - @Model.State
+                <br />
+                @Model.Zipcode
+                <br />
+
+            </dd>
+
+            <dt class="col-sm-3">Prodcuts</dt>
+            <dd class="col-sm-9">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.OrderLines)
+                        {
+                            <tr>
+
+                                <td><img src="/Upload/@item.Image" width="70" /></td>
+                                <td>@item.ProductName</td>
+                                <td>@item.Quantity</td>
+                                <td>@item.Price</td>
+                                <td>
+                                    <a href="/Home/Details/@item.ProductId" class="btn btn-primary" target="_blank">Product Details</a>
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </dd>
+        </dl>
+
+    </div>
+</div>
+

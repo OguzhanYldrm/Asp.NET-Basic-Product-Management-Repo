@@ -135,6 +135,7 @@ namespace Ecommerce.MvcWEBUI.Controllers
         }
 
         // GET: Logout
+        [Authorize]
         public ActionResult Logout()
         {
             var authManager = HttpContext.GetOwinContext().Authentication;
