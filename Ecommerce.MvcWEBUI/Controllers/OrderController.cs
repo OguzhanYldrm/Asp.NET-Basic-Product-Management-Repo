@@ -38,6 +38,7 @@ namespace Ecommerce.MvcWEBUI.Controllers
                 .Select(i => new OrderDetailsModel()
                 {
                     OrderId = i.Id,
+                    Username = i.UserName,
                     OrderNumber = i.OrderNumber,
                     OrderDate = i.OrderDate,
                     OrderState = i.OrderState,
@@ -58,6 +59,22 @@ namespace Ecommerce.MvcWEBUI.Controllers
                     }).ToList()
                 }).FirstOrDefault();
             return View(entity);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateOrderState(int OrderId, EnumOrderState OrderState)
+        {
+            var entity = db.Orders.FirstOrDefault(i => i.Id == OrderId);
+
+            if (entity == null) return RedirectToAction("Index", "Order");
+
+            entity.OrderState = OrderState;
+            db.SaveChanges();
+
+            TempData["message"] = "Order Updated";
+
+            return RedirectToAction("Details", new {id = OrderId});
+
         }
     }
 }
