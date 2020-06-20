@@ -9,77 +9,90 @@
     <div class="row">
         <h2>Order Details</h2>
         <hr />
+        @if (TempData["message"] != null)
+        {
+            <div class="alert alert-success">
+                @TempData["message"]
+            </div>
+        }
+    <dl class="row">
+        <dt class="col-sm-3">Username</dt>
+        <dd class="col-sm-9">@Model.Username</dd>
 
-        <dl class="row">
-            <dt class="col-sm-3">Order State</dt>
-            <dd class="col-sm-9">
-                @if (Model.OrderState == EnumOrderState.Waiting)
+
+        <dt class="col-sm-3">Order State</dt>
+        <dd class="col-sm-9">
+            <div class="row">
+                @using (Html.BeginForm("UpdateOrderState", "Order", FormMethod.Post))
                 {
-                    <span class="badge badge-danger">@Model.OrderState</span>
+                    @Html.HiddenFor(i => i.OrderId)
+                    <div class="col-md-9 float-left">
+                        @Html.EnumDropDownListFor(i => i.OrderState, "Select Order State", new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-3 float-right">
+                        <button type="submit" class="btn btn-primary btn-md">Update</button>
+                    </div>
                 }
-                else
-                {
-                    <span class="badge badge-success">@Model.OrderState</span>
-                }
-            </dd>
+            </div>
+        </dd>
 
-            <dt class="col-sm-3">Order Id</dt>
-            <dd class="col-sm-9">@Model.OrderId</dd>
+        <dt class="col-sm-3">Order Id</dt>
+        <dd class="col-sm-9">@Model.OrderId</dd>
 
-            <dt class="col-sm-3">Order Number</dt>
-            <dd class="col-sm-9">@Model.OrderNumber</dd>
+        <dt class="col-sm-3">Order Number</dt>
+        <dd class="col-sm-9">@Model.OrderNumber</dd>
 
-            <dt class="col-sm-3">Total</dt>
-            <dd class="col-sm-9">@Model.Total</dd>
+        <dt class="col-sm-3">Total</dt>
+        <dd class="col-sm-9">@Model.Total</dd>
 
-            <dt class="col-sm-3">Order Date</dt>
-            <dd class="col-sm-9">@Model.OrderDate</dd>
+        <dt class="col-sm-3">Order Date</dt>
+        <dd class="col-sm-9">@Model.OrderDate</dd>
 
-            <dt class="col-sm-3">Address</dt>
-            <dd class="col-sm-9">
-                @Model.AddressTitle
-                <br />
-                @Model.Address
-                <br />
-                @Model.City - @Model.State
-                <br />
-                @Model.Zipcode
-                <br />
+        <dt class="col-sm-3">Address</dt>
+        <dd class="col-sm-9">
+            @Model.AddressTitle
+            <br />
+            @Model.Address
+            <br />
+            @Model.City - @Model.State
+            <br />
+            @Model.Zipcode
+            <br />
 
-            </dd>
+        </dd>
 
-            <dt class="col-sm-3">Prodcuts</dt>
-            <dd class="col-sm-9">
-                <table class="table table-bordered">
-                    <thead>
+        <dt class="col-sm-3">Prodcuts</dt>
+        <dd class="col-sm-9">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.OrderLines)
+                    {
                         <tr>
-                            <th>Image</th>
-                            <th>Product Name</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
-                            <th></th>
+
+                            <td><img src="/Upload/@item.Image" width="70" /></td>
+                            <td>@item.ProductName</td>
+                            <td>@item.Quantity</td>
+                            <td>@item.Price</td>
+                            <td>
+                                <a href="/Home/Details/@item.ProductId" class="btn btn-primary" target="_blank">Product Details</a>
+                            </td>
+
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.OrderLines)
-                        {
-                            <tr>
+                    }
 
-                                <td><img src="/Upload/@item.Image" width="70" /></td>
-                                <td>@item.ProductName</td>
-                                <td>@item.Quantity</td>
-                                <td>@item.Price</td>
-                                <td>
-                                    <a href="/Home/Details/@item.ProductId" class="btn btn-primary" target="_blank">Product Details</a>
-                                </td>
-
-                            </tr>
-                        }
-
-                    </tbody>
-                </table>
-            </dd>
-        </dl>
+                </tbody>
+            </table>
+        </dd>
+    </dl>
 
     </div>
 </div>
